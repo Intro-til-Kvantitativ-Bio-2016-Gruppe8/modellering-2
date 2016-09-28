@@ -15,7 +15,7 @@ proteinMasse = function(antalAminosyrer)
 
 maengde_mRNA = 3.321E-19
 maengde_ribosomer = 9.98E-18
-maengde_tRNA = 12.2*maengde_ribosomer
+maengde_tRNA = 12.2*maengde_ribosomer/20 # antager at tRNA er ligeligt fordelt mellem alle typer aminosyrer
 ribosomalHastighed = 4 # aminosyrer/sek
 
 # Model
