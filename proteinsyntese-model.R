@@ -5,6 +5,7 @@ t0 = 1
 proteinSyntetiseret = vector(mode="numeric",length=t_max-t0+1)
 translationsProdukter = vector(mode="numeric",length=t_max-t0+1)
 proteinSyntese = vector(mode="numeric",length=t_max-t0+1)
+maengde_mRNA = vector(mode="numeric",length=t_max-t0+1)
 
 # Undermodeller
 
@@ -13,7 +14,6 @@ proteinMasse = function(antalAminosyrer)
   antalAminosyrer*118.9
 }
 
-maengde_mRNA = 3.321E-19
 maengde_ribosomer = 9.98E-18
 maengde_tRNA = 12.2*maengde_ribosomer/20 # antager at tRNA er ligeligt fordelt mellem alle typer aminosyrer
 ribosomalHastighed = 4 # aminosyrer/sek
@@ -21,10 +21,12 @@ ribosomalHastighed = 4 # aminosyrer/sek
 # Model
 ## Startbetingelser
 proteinSyntetiseret[t0] = 0
+maengde_mRNA[t0] = 3.321E-19
 ## Simulation
 for(t in t0:t_max)
 {
-  translationsProdukter[t] = min(maengde_mRNA, maengde_ribosomer, maengde_tRNA)*ribosomalHastighed
+  maengde_mRNA[t+1] = maengde_mRNA[t]
+  translationsProdukter[t] = min(maengde_mRNA[t], maengde_ribosomer, maengde_tRNA)*ribosomalHastighed
   proteinSyntese[t] = proteinMasse(translationsProdukter[t])
   proteinSyntetiseret[t+1] = proteinSyntetiseret[t] + proteinSyntese[t]
 }
