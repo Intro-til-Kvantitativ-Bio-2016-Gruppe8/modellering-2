@@ -19,6 +19,8 @@ maengde_ribosomer = 9.98E-18
 maengde_tRNA = 12.2*maengde_ribosomer/20 # antager at tRNA er ligeligt fordelt mellem alle typer aminosyrer
 ribosomalHastighed = 4 # aminosyrer/sek
 andel_aktivt_mRNA = 1
+mRNA_halfLife = 10*(60*60) # sekunder
+mRNA_rente = exp(log(1/2)/mRNA_halfLife) - 1
 
 # Model
 ## Startbetingelser
@@ -27,7 +29,7 @@ maengde_mRNA[t0] = 3.321E-19
 ## Simulation
 for(t in t0:t_max)
 {
-  Dmaengde_mRNA[t] = 0
+  Dmaengde_mRNA[t] = mRNA_rente*maengde_mRNA[t]
   maengde_mRNA[t+1] = maengde_mRNA[t]+Dmaengde_mRNA[t]
   translationsProdukter[t] = min(andel_aktivt_mRNA*maengde_mRNA[t], maengde_ribosomer, maengde_tRNA)*ribosomalHastighed
   DproteinSyntetiseret[t] = proteinMasse(translationsProdukter[t])
