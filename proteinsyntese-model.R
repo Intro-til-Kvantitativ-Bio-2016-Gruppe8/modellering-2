@@ -24,7 +24,7 @@ proteinMasse = function(antalAminosyrer)
   antalAminosyrer*118.9
 }
 avogadro = 6E23
-maengde_ribosomer = 9.98E-18
+maengde_ribosomer = 3.3E6/avogadro
 maengde_tRNA = 12.2*maengde_ribosomer/20 # antager at tRNA er ligeligt fordelt mellem alle typer aminosyrer
 ribosomalHastighed = 4 # aminosyrer/sek
 andel_aktivt_mRNA = 0.6 # Tennas gæt
@@ -40,7 +40,7 @@ andel_succesfulde_mRNA = 0.01 # fra BioNumbers
 # Model
 ## Startbetingelser
 proteinSyntetiseret[t0] = 0
-maengde_mRNA[t0] = 3.321E-19
+maengde_mRNA[t0] = 2E5/avogadro
 ## Simulation
 for(t in t0:t_max)
 {
