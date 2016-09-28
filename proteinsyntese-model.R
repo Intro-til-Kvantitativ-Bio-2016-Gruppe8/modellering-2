@@ -1,3 +1,10 @@
+# Hjælpefunktioner
+
+plotSeveralSeries = function(x, ys) { # Kaldes som følger: plotSeveralSeries(x-værdi-vektor,data.frame(y-værdi-vektor1,y-værdi-vektor2))
+  matplot(x,as.matrix(ys), col = 1:length(ys), type="l")
+  legend("topright", legend = names(ys), pch = 1, col = 1:length(ys))
+}
+
 # Initialisering
 t_max = 60*60 # sek i en time
 t0 = 1
