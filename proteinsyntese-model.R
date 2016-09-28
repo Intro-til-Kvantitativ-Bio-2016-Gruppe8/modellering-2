@@ -6,6 +6,7 @@ proteinSyntetiseret = vector(mode="numeric",length=t_max-t0+1)
 DproteinSyntetiseret = vector(mode="numeric",length=t_max-t0+1)
 translationsProdukter = vector(mode="numeric",length=t_max-t0+1)
 maengde_mRNA = vector(mode="numeric",length=t_max-t0+1)
+Dmaengde_mRNA = vector(mode="numeric",length=t_max-t0+1)
 
 # Undermodeller
 
@@ -26,7 +27,8 @@ maengde_mRNA[t0] = 3.321E-19
 ## Simulation
 for(t in t0:t_max)
 {
-  maengde_mRNA[t+1] = maengde_mRNA[t]
+  Dmaengde_mRNA[t] = 0
+  maengde_mRNA[t+1] = maengde_mRNA[t]+Dmaengde_mRNA[t]
   translationsProdukter[t] = min(andel_aktivt_mRNA*maengde_mRNA[t], maengde_ribosomer, maengde_tRNA)*ribosomalHastighed
   DproteinSyntetiseret[t] = proteinMasse(translationsProdukter[t])
   proteinSyntetiseret[t+1] = proteinSyntetiseret[t] + DproteinSyntetiseret[t]
