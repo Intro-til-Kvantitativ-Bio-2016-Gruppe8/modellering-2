@@ -17,6 +17,7 @@ proteinMasse = function(antalAminosyrer)
 maengde_ribosomer = 9.98E-18
 maengde_tRNA = 12.2*maengde_ribosomer/20 # antager at tRNA er ligeligt fordelt mellem alle typer aminosyrer
 ribosomalHastighed = 4 # aminosyrer/sek
+andel_aktivt_mRNA = 1
 
 # Model
 ## Startbetingelser
@@ -26,7 +27,7 @@ maengde_mRNA[t0] = 3.321E-19
 for(t in t0:t_max)
 {
   maengde_mRNA[t+1] = maengde_mRNA[t]
-  translationsProdukter[t] = min(maengde_mRNA[t], maengde_ribosomer, maengde_tRNA)*ribosomalHastighed
+  translationsProdukter[t] = min(andel_aktivt_mRNA*maengde_mRNA[t], maengde_ribosomer, maengde_tRNA)*ribosomalHastighed
   DproteinSyntetiseret[t] = proteinMasse(translationsProdukter[t])
   proteinSyntetiseret[t+1] = proteinSyntetiseret[t] + DproteinSyntetiseret[t]
 }
