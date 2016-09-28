@@ -42,7 +42,8 @@ for(t in t0:t_max)
   DproteinSyntetiseret[t] = proteinMasse(translationsProdukter[t])
   proteinSyntetiseret[t+1] = proteinSyntetiseret[t] + DproteinSyntetiseret[t]
 }
-plot(t0:(t_max+1),proteinSyntetiseret,type = "l",ylab = "Massen af protein i gram",xlab = "Tiden i sekunder",main = "Massen af protien over tid",
-    ,mgp=c(1.4,.4,0), font.lab=2,
+plot(t0:(t_max+1),proteinSyntetiseret,type = "l",
+     ylab = "Massen af protein i gram",xlab = "Tiden i sekunder",main = "Massen af protien over tid",
+     mgp=c(1.4,.4,0), font.lab=2,
      cex.lab=0.9, cex.axis=0.8,cex.main=1.2)
-(10^-9*10^-3)/proteinSyntetiseret[t_max] # Enheden er milliarder af celler der skal til at producere 1 mg protein på en time
+(10^-9*10^-3)/proteinSyntetiseret[t_max] # Enheden er milliarder af celler der skal til at producere 1 mg protein pÃ¥ en time
