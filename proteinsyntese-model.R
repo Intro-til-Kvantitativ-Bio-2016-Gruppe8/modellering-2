@@ -3,8 +3,8 @@ t_max = 60*60 # sek i en time
 t0 = 1
 
 proteinSyntetiseret = vector(mode="numeric",length=t_max-t0+1)
+DproteinSyntetiseret = vector(mode="numeric",length=t_max-t0+1)
 translationsProdukter = vector(mode="numeric",length=t_max-t0+1)
-proteinSyntese = vector(mode="numeric",length=t_max-t0+1)
 maengde_mRNA = vector(mode="numeric",length=t_max-t0+1)
 
 # Undermodeller
@@ -27,8 +27,8 @@ for(t in t0:t_max)
 {
   maengde_mRNA[t+1] = maengde_mRNA[t]
   translationsProdukter[t] = min(maengde_mRNA[t], maengde_ribosomer, maengde_tRNA)*ribosomalHastighed
-  proteinSyntese[t] = proteinMasse(translationsProdukter[t])
-  proteinSyntetiseret[t+1] = proteinSyntetiseret[t] + proteinSyntese[t]
+  DproteinSyntetiseret[t] = proteinMasse(translationsProdukter[t])
+  proteinSyntetiseret[t+1] = proteinSyntetiseret[t] + DproteinSyntetiseret[t]
 }
 plot(t0:(t_max+1),proteinSyntetiseret,type = "l")
 (10^-9*10^-3)/proteinSyntetiseret[t_max] # Enheden er milliarder af celler der skal til at producere 1 mg protein på en time
